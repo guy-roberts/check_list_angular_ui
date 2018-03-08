@@ -1,0 +1,10 @@
+<div *ngIf="audit_type">
+
+  <h2>{{ audit_type.title | uppercase }} Details</h2>
+  <div>
+    <label>Title:
+      <input [(ngModel)]="audit_type.title" placeholder="title"/>
+    </label>
+  </div>
+
+</div>

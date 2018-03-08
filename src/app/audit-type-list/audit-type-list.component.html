@@ -1,0 +1,15 @@
+<p>
+  These are the Audit Types
+</p>
+
+<ul>
+  <li *ngFor="let audit_type of audit_types"
+    [class.selected]="audit_type === selectedAuditType"
+    (click)="onSelect(audit_type)">
+
+    <span class="badge">{{audit_type.id}}</span> {{audit_type.title}}
+  </li>
+</ul>
+
+
+<app-audit-type-detail [audit_type]="selectedAuditType"></app-audit-type-detail>
