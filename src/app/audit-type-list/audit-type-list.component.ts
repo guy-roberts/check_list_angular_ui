@@ -33,7 +33,6 @@ export class AuditTypeListComponent implements OnInit {
     }).subscribe(
       (audit_types: JsonApiQueryData<AuditType>) => {
         this.audit_types = audit_types.getModels();
-        debugger;
       }
     );
   }
