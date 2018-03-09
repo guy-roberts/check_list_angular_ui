@@ -6,6 +6,9 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { AuditTypeListComponent } from './audit-type-list/audit-type-list.component';
 import { AuditTypeDetailComponent } from './audit-type-detail/audit-type-detail.component';
+import { AvailableComponentsComponent } from './available-components/available-components.component';
+
+import { DragulaModule } from 'ng2-dragula';
 
 import { JsonApiModule } from 'angular2-jsonapi';
 import { Datastore } from '../services/datastore';
@@ -14,13 +17,15 @@ import { Datastore } from '../services/datastore';
   declarations: [
     AppComponent,
     AuditTypeListComponent,
-    AuditTypeDetailComponent
+    AuditTypeDetailComponent,
+    AvailableComponentsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    JsonApiModule
+    JsonApiModule,
+    DragulaModule
   ],
   providers: [Datastore],
   bootstrap: [AppComponent]
