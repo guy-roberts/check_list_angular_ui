@@ -1,0 +1,11 @@
+<h2>Available Components</h2>
+
+<div>
+  <div class='wrapper'>
+    <div class='container' [dragula]='"some-bag"'>
+      <div *ngFor="let available_component of available_components">
+          {{available_component.title}}
+      </div>
+    </div>
+  </div>
+</div>
