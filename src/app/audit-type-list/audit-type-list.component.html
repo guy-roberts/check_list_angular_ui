@@ -1,19 +1,12 @@
 <h2>
-  Audit Types
+  Audit Types aaa
 </h2>
 
 <ul>
   <li *ngFor="let audit_type of audit_types"
-    [class.selected]="audit_type === selectedAuditType"
-    (click)="onSelect(audit_type)">
-
-    <span class="badge">{{audit_type.id}}</span> {{audit_type.title}}
+      routerLink="/audit_type/{{audit_type.id}}">
+    <span>{{audit_type.title}}</span>
   </li>
 </ul>
 
-
-<app-audit-type-detail [audit_type]="selectedAuditType"></app-audit-type-detail>
-
-
-
-<app-available-components></app-available-components>
+<router-outlet></router-outlet>
