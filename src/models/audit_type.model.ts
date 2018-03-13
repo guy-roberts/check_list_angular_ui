@@ -1,4 +1,6 @@
-import { JsonApiModelConfig, JsonApiModel, Attribute, HasMany, BelongsTo } from 'angular2-jsonapi';
+import { JsonApiModelConfig, JsonApiModel, Attribute, HasMany } from 'angular2-jsonapi';
+
+import { AuditTypeComponent } from './audit_type_component.model';
 
 @JsonApiModelConfig({
   type: 'audit_types'
@@ -10,6 +12,9 @@ export class AuditType extends JsonApiModel {
 
   @Attribute()
   has_photo: boolean;
+
+  @HasMany()
+  audit_type_components: AuditTypeComponent[];
 }
 
 @JsonApiModelConfig({

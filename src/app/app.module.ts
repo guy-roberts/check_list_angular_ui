@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
+import { MaterialModule } from './material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { AuditTypeListComponent } from './audit-type-list/audit-type-list.component';
@@ -40,9 +42,10 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
     JsonApiModule,
     DragulaModule,
+    MaterialModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only

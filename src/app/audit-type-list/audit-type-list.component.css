@@ -2,3 +2,7 @@ ul, ul li {
   font-size: 100%;
   color: red;
 }
+
+h2 {
+  text-align: left;
+}

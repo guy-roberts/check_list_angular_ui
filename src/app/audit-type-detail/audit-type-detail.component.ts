@@ -25,8 +25,10 @@ export class AuditTypeDetailComponent implements OnInit {
     this.getAuditType(this.audit_type_id);
   }
   getAuditType(id) {
-    this.datastore.findRecord(AuditType, id).subscribe(
-      (audit_type: AuditType) => this.audit_type = audit_type
+    this.datastore.findRecord(AuditType, id, {included: 'audit_type_components'}).subscribe(
+      (audit_type: AuditType) => {
+        this.audit_type = audit_type;
+      }
     );
   }
 }

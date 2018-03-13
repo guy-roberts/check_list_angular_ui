@@ -1,12 +1,16 @@
 <h2>
-  Audit Types aaa
+  Check List designs
 </h2>
 
-<ul>
-  <li *ngFor="let audit_type of audit_types"
-      routerLink="/audit_type/{{audit_type.id}}">
-    <span>{{audit_type.title}}</span>
-  </li>
-</ul>
+<mat-list>
+  <mat-list-item *ngFor="let audit_type of audit_types" >
+    <button mat-button routerLink="/audit_type/{{audit_type.id}}">{{audit_type.title}}</button>
+  </mat-list-item>
+</mat-list>
 
 <router-outlet></router-outlet>
+
+
+
+
+
