@@ -2,6 +2,7 @@ import { AuditType } from '../../models/audit_type.model';
 import { Component, OnInit } from '@angular/core';
 import { Datastore } from '../../services/datastore';
 import { ActivatedRoute } from '@angular/router';
+import { DragulaService } from 'ng2-dragula';
 
 @Component({
   selector: 'app-audit-type-detail',
@@ -9,26 +10,97 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./audit-type-detail.component.css']
 })
 
-
 export class AuditTypeDetailComponent implements OnInit {
   audit_type: AuditType;
   audit_type_id: string;
+  dragularService: DragulaService;
   route: ActivatedRoute;
 
-  constructor(private datastore: Datastore, route: ActivatedRoute) {
+  constructor(private datastore: Datastore, route: ActivatedRoute, private dragulaService: DragulaService) {
     this.audit_type_id = route.snapshot.params['id'];
     this.route = route;
+    this.dragularService = dragulaService;
+
+    dragulaService.drag.subscribe((value) => {
+      this.onDrag(value.slice(1));
+    });
+    dragulaService.drop.subscribe((value) => {
+      this.onDrop(value.slice(1));
+    });
+    dragulaService.over.subscribe((value) => {
+      this.onOver(value.slice(1));
+    });
+    dragulaService.out.subscribe((value) => {
+      this.onOut(value.slice(1));
+    });
   }
 
   ngOnInit() {
     // Get the id from the route, fetch the info about this audit_type
     this.getAuditType(this.audit_type_id);
+
+
   }
   getAuditType(id) {
     this.datastore.findRecord(AuditType, id, {included: 'audit_type_components'}).subscribe(
       (audit_type: AuditType) => {
         this.audit_type = audit_type;
+
+        // Sort by position
+        this.audit_type.audit_type_components = this.audit_type.audit_type_components.sort((a, b) => {
+          if (a.position < b.position) {
+            return -1;
+          } else if (a.position > b.position) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+
+        this.dragulaService.setOptions(('component-bag' + this.audit_type.id), {
+          moves: function (el, container, handle) {
+            return handle.className === 'handle';
+          }
+        });
       }
     );
+  }
+
+  // Dragular functions to show which element has moved
+
+  private hasClass(el: any, name: string) {
+    return new RegExp('(?:^|\\s+)' + name + '(?:\\s+|$)').test(el.className);
+  }
+
+  private addClass(el: any, name: string) {
+    if (!this.hasClass(el, name)) {
+      el.className = el.className ? [el.className, name].join(' ') : name;
+    }
+  }
+
+  private removeClass(el: any, name: string) {
+    if (this.hasClass(el, name)) {
+      el.className = el.className.replace(new RegExp('(?:^|\\s+)' + name + '(?:\\s+|$)', 'g'), '');
+    }
+  }
+
+  private onDrag(args) {
+    let [e, el] = args;
+    this.removeClass(e, 'ex-moved');
+  }
+
+  private onDrop(args) {
+    let [e, el] = args;
+    this.addClass(e, 'ex-moved');
+  }
+
+  private onOver(args) {
+    let [e, el, container] = args;
+    this.addClass(el, 'ex-over');
+  }
+
+  private onOut(args) {
+    let [e, el, container] = args;
+    this.removeClass(el, 'ex-over');
   }
 }

@@ -2,22 +2,20 @@
   <mat-card-title>
     <mat-grid-list cols="2" rowHeight="100px">
       <mat-grid-tile><span class="check_list_title">{{ audit_type.title | uppercase }}</span></mat-grid-tile>
-      <mat-grid-tile><button mat-raised-button color="primary" routerLink="/audit_types">Back</button></mat-grid-tile>
+      <mat-grid-tile>
+        <div class="button-row">
+            <button mat-raised-button color="accent" routerLink="/audit_types">Add</button>
+            <button mat-raised-button color="primary" routerLink="/audit_types">Back</button>
+        </div>
+      </mat-grid-tile>
     </mat-grid-list>
   </mat-card-title>
   <div>
-    <mat-list *ngFor="let component of audit_type.audit_type_components">
-      <mat-list-item>
-        <button >
-          <mat-icon>reorder</mat-icon>
-        </button>
-        {{component.title}}
-        {{component.position}}
-        {{component.help_text}}
-        {{component.choices}}
-      </mat-list-item>
-      <mat-divider></mat-divider>
-    </mat-list>
+    <ul class='container' [dragula]='"component-bag-" + audit_type.id' >
+        <li *ngFor="let component of audit_type.audit_type_components" dragula-model="audit_type.audit_type_components">
+          <app-audit-type-edit [audit_type_component]=component></app-audit-type-edit>
+          <mat-divider></mat-divider>
+        </li>
+    </ul>
   </div>
 </div>
-

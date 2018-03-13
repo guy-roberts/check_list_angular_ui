@@ -7,10 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Design a check list';
-  showFiller = false;
 
   constructor() {
   };
-
-
 }

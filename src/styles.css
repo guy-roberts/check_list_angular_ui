@@ -22,3 +22,9 @@ mat-toolbar-row {
   right: 20px;
   color: white;
 }
+
+
+ul {
+  list-style-type:none;
+}
+

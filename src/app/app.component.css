@@ -16,3 +16,8 @@
   background-color: darkolivegreen;
   color: #FFF;
 }
+
+.main-toolbar {
+  position: relative;
+  z-index: 2;
+}

@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,6 +14,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { DragulaModule } from 'ng2-dragula';
 import { JsonApiModule } from 'angular2-jsonapi';
 import { Datastore } from '../services/datastore';
+import { AuditTypeEditComponent } from './audit-type-edit/audit-type-edit.component';
 
 
 const appRoutes: Routes = [
@@ -37,7 +37,9 @@ const appRoutes: Routes = [
     AuditTypeListComponent,
     AuditTypeDetailComponent,
     AvailableComponentsComponent,
-    PageNotFoundComponent
+    AuditTypeEditComponent,
+    PageNotFoundComponent,
+    AuditTypeEditComponent
   ],
   imports: [
     BrowserModule,
