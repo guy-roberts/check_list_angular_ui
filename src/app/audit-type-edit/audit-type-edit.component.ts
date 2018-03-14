@@ -9,10 +9,15 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class AuditTypeEditComponent implements OnInit {
 
-  @Input() audit_type_component: AuditTypeComponent;
-  constructor() { }
+  @Input() audit_type_components: AuditTypeComponent;
+  constructor() {
+  }
 
   ngOnInit() {
+  }
+
+  saveComponentChanges(component: AuditTypeComponent) {
+      component.save().subscribe();  // => PATCH to '/posts/1'
   }
 
 }

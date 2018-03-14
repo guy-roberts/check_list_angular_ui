@@ -1,15 +1,18 @@
 <div class="audit_type_component_edit">
   <span>
-    <h3 class="handle">{{audit_type_component.title}}</h3>
-    <p>{{audit_type_component.help_text}}</p>
-    <form class="example-form">
+    <h3  class="handle">{{audit_type_component.title}}</h3>
+    <form class="exampleForm" name="exampleForm">
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Favorite food" value="Sushi">
+        <input matInput placeholder="Title" value="{{audit_type_component.title}}" name="title" [(ngModel)]="audit_type_component.title">
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <textarea matInput placeholder="Leave a comment"></textarea>
+        <textarea matInput placeholder="Help text"></textarea>
       </mat-form-field>
+
+      <button mat-raised-button (click)="saveComponentChanges(audit_type_component)">Save</button>
     </form>
+
+    <div *ngIf="audit_type_component.has_image"><mat-icon>contact_phone</mat-icon></div>
   </span>
 </div>

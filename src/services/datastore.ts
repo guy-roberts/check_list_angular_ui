@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http } from '@angular/http';
 import { AuditType, AvailableComponents } from '../models/audit_type.model';
 import { AuditTypeComponent } from '../models/audit_type_component.model';
 

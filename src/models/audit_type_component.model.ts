@@ -3,7 +3,7 @@ import { JsonApiModelConfig, JsonApiModel, Attribute, BelongsTo } from 'angular2
 import { AuditType } from './audit_type.model';
 
 @JsonApiModelConfig({
-  type: 'audit_type_component'
+  type: 'audit_type_components'
 })
 export class AuditTypeComponent  extends JsonApiModel {
 

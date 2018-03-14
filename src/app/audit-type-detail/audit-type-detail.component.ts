@@ -1,5 +1,5 @@
 import { AuditType } from '../../models/audit_type.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Datastore } from '../../services/datastore';
 import { ActivatedRoute } from '@angular/router';
 import { DragulaService } from 'ng2-dragula';
@@ -10,7 +10,7 @@ import { DragulaService } from 'ng2-dragula';
   styleUrls: ['./audit-type-detail.component.css']
 })
 
-export class AuditTypeDetailComponent implements OnInit {
+export class AuditTypeDetailComponent implements OnInit, OnDestroy {
   audit_type: AuditType;
   audit_type_id: string;
   dragularService: DragulaService;
@@ -20,29 +20,30 @@ export class AuditTypeDetailComponent implements OnInit {
     this.audit_type_id = route.snapshot.params['id'];
     this.route = route;
     this.dragularService = dragulaService;
-
-    dragulaService.drag.subscribe((value) => {
-      this.onDrag(value.slice(1));
-    });
-    dragulaService.drop.subscribe((value) => {
-      this.onDrop(value.slice(1));
-    });
-    dragulaService.over.subscribe((value) => {
-      this.onOver(value.slice(1));
-    });
-    dragulaService.out.subscribe((value) => {
-      this.onOut(value.slice(1));
-    });
   }
 
   ngOnInit() {
     // Get the id from the route, fetch the info about this audit_type
     this.getAuditType(this.audit_type_id);
 
-
+    this.dragulaService.drag.subscribe((value) => {
+      this.onDrag(value.slice(1));
+    });
+    this.dragulaService.drop.subscribe((value) => {
+      this.onDrop(value.slice(1));
+    });
+    this.dragulaService.over.subscribe((value) => {
+      this.onOver(value.slice(1));
+    });
+    this.dragulaService.out.subscribe((value) => {
+      this.onOut(value.slice(1));
+    });
+  }
+  ngOnDestroy() {
+    //this.dragulaService.destroy('component-bag');
   }
   getAuditType(id) {
-    this.datastore.findRecord(AuditType, id, {included: 'audit_type_components'}).subscribe(
+    this.datastore.findRecord(AuditType, id).subscribe(
       (audit_type: AuditType) => {
         this.audit_type = audit_type;
 
@@ -57,13 +58,18 @@ export class AuditTypeDetailComponent implements OnInit {
           }
         });
 
-        this.dragulaService.setOptions(('component-bag' + this.audit_type.id), {
+        this.dragulaService.setOptions(('component_bag'), {
           moves: function (el, container, handle) {
             return handle.className === 'handle';
           }
         });
       }
     );
+  }
+
+  saveChanges() {
+    // Are changes to the audit_type_component titles here ?
+
   }
 
   // Dragular functions to show which element has moved
