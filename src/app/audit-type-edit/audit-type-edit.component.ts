@@ -9,7 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class AuditTypeEditComponent implements OnInit {
 
-  @Input() audit_type_components: AuditTypeComponent;
+  @Input() audit_type_component: AuditTypeComponent;
   constructor() {
   }
 
