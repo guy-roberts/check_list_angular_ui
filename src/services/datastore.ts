@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { AuditType, AvailableComponents } from '../models/audit_type.model';
+import { AuditType } from '../models/audit_type.model';
 import { AuditTypeComponent } from '../models/audit_type_component.model';
 
 import { JsonApiDatastoreConfig, JsonApiDatastore, DatastoreConfig } from 'angular2-jsonapi';
 
 const config: DatastoreConfig = {
-  baseUrl: 'http://localhost:3000/check_list_engine/api/v1/',
+  baseUrl: 'http://localhost:3000/check_list_engine/api/',
   models: {
     audit_type: AuditType,
-    available_component: AvailableComponents,
-    audit_type_component: AuditTypeComponent
+    audit_type_components: AuditTypeComponent
   }
 }
 

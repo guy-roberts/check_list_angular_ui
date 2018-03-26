@@ -11,9 +11,6 @@ export class AuditTypeComponent  extends JsonApiModel {
   title: string;
 
   @Attribute()
-  position: string;
-
-  @Attribute()
   help_text: string;
 
   @Attribute()

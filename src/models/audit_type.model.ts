@@ -10,9 +10,6 @@ export class AuditType extends JsonApiModel {
   @Attribute()
   title: string;
 
-  @Attribute()
-  has_photo: boolean;
-
   @HasMany()
   audit_type_components: AuditTypeComponent[];
 }

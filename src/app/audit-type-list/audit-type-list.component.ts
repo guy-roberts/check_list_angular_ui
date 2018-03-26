@@ -26,10 +26,7 @@ export class AuditTypeListComponent implements OnInit {
 
   getAuditTypes() {
     this.datastore.findAll(AuditType, {
-      page: { size: 10, number: 1 },
-      filter: {
-        title: 'My Audit',
-      },
+      include: 'audit_type_components'
     }).subscribe(
       (audit_types: JsonApiQueryData<AuditType>) => {
         this.audit_types = audit_types.getModels();

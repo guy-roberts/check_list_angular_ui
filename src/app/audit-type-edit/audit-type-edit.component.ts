@@ -17,7 +17,13 @@ export class AuditTypeEditComponent implements OnInit {
   }
 
   saveComponentChanges(component: AuditTypeComponent) {
-      component.save().subscribe();  // => PATCH to '/posts/1'
+    component.save().subscribe(
+      (result: any) => {
+      },
+      (result: any) => {
+        alert('Failed to save an AuditType');
+      }
+    );  // => PATCH to '/posts/1'
   }
 
 }

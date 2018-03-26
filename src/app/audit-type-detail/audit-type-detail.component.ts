@@ -40,23 +40,12 @@ export class AuditTypeDetailComponent implements OnInit, OnDestroy {
     });
   }
   ngOnDestroy() {
-    //this.dragulaService.destroy('component-bag');
+    // this.dragulaService.destroy('component-bag');
   }
   getAuditType(id) {
-    this.datastore.findRecord(AuditType, id).subscribe(
+    this.datastore.findRecord(AuditType, id, {include: 'audit_type_components'}).subscribe(
       (audit_type: AuditType) => {
         this.audit_type = audit_type;
-
-        // Sort by position
-        this.audit_type.audit_type_components = this.audit_type.audit_type_components.sort((a, b) => {
-          if (a.position < b.position) {
-            return -1;
-          } else if (a.position > b.position) {
-            return 1;
-          } else {
-            return 0;
-          }
-        });
 
         this.dragulaService.setOptions(('component_bag'), {
           moves: function (el, container, handle) {

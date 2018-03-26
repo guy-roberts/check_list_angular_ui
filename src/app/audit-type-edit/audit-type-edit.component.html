@@ -7,8 +7,17 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <textarea matInput placeholder="Help text"></textarea>
+        <input matInput placeholder="Choices" value="{{audit_type_component.choices}}" name="choices" [(ngModel)]="audit_type_component.choices">
       </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="Help text" value="{{audit_type_component.help_text}}"  name="help_text" [(ngModel)]="audit_type_component.help_text"></textarea>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Is mandatory" value="{{audit_type_component.is_mandatory}}" name="is_mandatory" [(ngModel)]="audit_type_component.is_mandatory">
+      </mat-form-field>
+      
 
       <button mat-raised-button (click)="saveComponentChanges(audit_type_component)">Save</button>
     </form>
