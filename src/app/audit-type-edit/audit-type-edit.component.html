@@ -1,27 +1,51 @@
-<div class="audit_type_component_edit">
-  <span>
-    <h3  class="handle">{{audit_type_component.title}}</h3>
-    <form class="exampleForm" name="exampleForm">
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Title" value="{{audit_type_component.title}}" name="title" [(ngModel)]="audit_type_component.title">
-      </mat-form-field>
+<div class="audit_type_component_edit" >
 
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Choices" value="{{audit_type_component.choices}}" name="choices" [(ngModel)]="audit_type_component.choices">
-      </mat-form-field>
+  <mat-grid-list *ngIf="!inEditMode" cols="10" rowHeight="4em">
+    <mat-grid-tile colspan="1">
+      <mat-icon class="component-icon">{{iconName()}}</mat-icon>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="6">
+      <div class="text-inside-grid">
+        <h3>{{audit_type_component.title}}</h3>
+        <p>{{audit_type_component.help_text}}</p>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2">
+      <button mat-icon-button *ngIf="!inEditMode" (click)="startEditing()">
+        <mat-icon aria-label="Edit this component">edit</mat-icon>
+      </button>
+      <button mat-icon-button *ngIf="!inEditMode" (click)="startEditing()">
+        <mat-icon aria-label="Edit this component">pan</mat-icon>
+      </button>
+    </mat-grid-tile>
+  </mat-grid-list>
 
-      <mat-form-field class="example-full-width">
-        <textarea matInput placeholder="Help text" value="{{audit_type_component.help_text}}"  name="help_text" [(ngModel)]="audit_type_component.help_text"></textarea>
-      </mat-form-field>
+  <form class="componentForm"  #componentForm="ngForm" *ngIf="inEditMode" name="componentForm" class="component-form in-edit-mode example-container" novalidate (ngSubmit)="saveComponentChanges(audit_type_component)">
 
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Is mandatory" value="{{audit_type_component.is_mandatory}}" name="is_mandatory" [(ngModel)]="audit_type_component.is_mandatory">
-      </mat-form-field>
-      
+    <mat-form-field>
+      <input matInput placeholder="Title" value="{{audit_type_component.title}}" name="title" [(ngModel)]="audit_type_component.title" required #name="ngModel">
+      <div [hidden]="name.valid || name.pristine"
+           class="alert alert-danger">
+        Title is required
+      </div>
+    </mat-form-field>
+    <mat-form-field *ngIf="showChoices()">
+      <input matInput placeholder="Choices" value="{{audit_type_component.choices}}" name="choices" [(ngModel)]="audit_type_component.choices">
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput placeholder="Help text" value="{{audit_type_component.help_text}}"  name="help_text" [(ngModel)]="audit_type_component.help_text" required></textarea>
+    </mat-form-field>
 
-      <button mat-raised-button (click)="saveComponentChanges(audit_type_component)">Save</button>
-    </form>
+    <section>
+      <label>Is mandatory ? </label>
+      <mat-checkbox  name="is_mandatory" [(ngModel)]="audit_type_component.is_mandatory"></mat-checkbox>
 
-    <div *ngIf="audit_type_component.has_image"><mat-icon>contact_phone</mat-icon></div>
-  </span>
+      <div class="button-row">
+        <button type="submit" mat-raised-button [disabled]="!componentForm.form.valid">Save</button>
+        <button mat-raised-button (click)="cancel()">Cancel</button>
+      </div>
+
+    </section>
+  </form>
+
 </div>

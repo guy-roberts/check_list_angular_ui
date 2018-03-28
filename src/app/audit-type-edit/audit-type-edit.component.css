@@ -1,4 +1,52 @@
 .audit_type_component_edit {
   text-align: left;
   padding: 1em;
+  border: 1px solid #666;
+}
+
+form.component-form div {
+  margin-right: 2em;
+}
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.example-container > * {
+  width: 100%;
+}
+
+.button-row {
+  text-align: right;
+}
+
+figure.mat-figure div {
+  margin: 0;
+  padding: 0;
+}
+
+.mat-grid-tile {
+  margin: 0;
+  padding: 0;
+}
+
+/* A clunky way to left align contents of the grid */
+.text-inside-grid {
+  position: absolute;
+  left: 2em;
+}
+
+.component-icon {
+  font-size: 300%;
+  color: darkseagreen;
+}
+
+.alert {
+  color: red;
+}
+
+.in-edit-mode {
+  background-color: lightcyan;
+  padding: 1em;
 }

@@ -28,3 +28,8 @@ span.check_list_title {
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
   filter: alpha(opacity=20);
 }
+
+ul.container {
+  margin: 0;
+  padding: 0;
+}

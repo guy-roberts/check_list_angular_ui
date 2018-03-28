@@ -11,12 +11,10 @@
       </mat-grid-tile>
     </mat-grid-list>
   </mat-card-title>
-  <div>
-    <ul class='container' [dragula]='component-bag' >
-        <li *ngFor="let component of audit_type.audit_type_components" dragula-model="audit_type.audit_type_components">
-          <app-audit-type-edit [audit_type_component]=component></app-audit-type-edit>
-          <mat-divider></mat-divider>
-        </li>
-    </ul>
-  </div>
+
+  <ul class='container' [dragula]='component-bag' >
+      <li *ngFor="let component of audit_type.audit_type_components" dragula-model="audit_type.audit_type_components">
+        <app-audit-type-edit [audit_type_component]=component></app-audit-type-edit>
+      </li>
+  </ul>
 </div>
