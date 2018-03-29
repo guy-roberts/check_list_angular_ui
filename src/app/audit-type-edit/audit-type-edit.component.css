@@ -38,8 +38,8 @@ figure.mat-figure div {
 }
 
 .component-icon {
-  font-size: 300%;
-  color: darkseagreen;
+  font-size: 200%;
+  color: #2196F3;
 }
 
 .alert {
@@ -47,6 +47,6 @@ figure.mat-figure div {
 }
 
 .in-edit-mode {
-  background-color: lightcyan;
+  background-color: #E3F2FD;
   padding: 1em;
 }

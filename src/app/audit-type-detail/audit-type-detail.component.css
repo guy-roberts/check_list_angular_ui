@@ -2,10 +2,6 @@ span.check_list_title {
   text-align: left;
 }
 
-.ex-moved {
-  background-color: ghostwhite;
-}
-
 .gu-mirror {
   position: fixed !important;
   margin: 0 !important;
@@ -33,3 +29,8 @@ ul.container {
   margin: 0;
   padding: 0;
 }
+
+.ex-moved {
+  border-right: 10px solid #2196F3;
+}
+
