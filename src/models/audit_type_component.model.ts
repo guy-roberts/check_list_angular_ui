@@ -22,6 +22,9 @@ export class AuditTypeComponent  extends JsonApiModel {
   @Attribute()
   is_mandatory: boolean;
 
+  @Attribute()
+  position: string;
+
   @BelongsTo()
   audit_type: AuditType;
 }

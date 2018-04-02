@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Datastore } from '../../services/datastore';
 import { ActivatedRoute } from '@angular/router';
 import { DragulaService } from 'ng2-dragula';
+import {AuditTypeComponent} from "../../models/audit_type_component.model";
 
 @Component({
   selector: 'app-audit-type-detail',
@@ -17,8 +18,6 @@ export class AuditTypeDetailComponent implements OnInit, OnDestroy {
   audit_type_id: string;
   dragularService: DragulaService;
   route: ActivatedRoute;
-
-
 
   constructor(private datastore: Datastore, route: ActivatedRoute, private dragulaService: DragulaService) {
     this.audit_type_id = route.snapshot.params['id'];
@@ -71,30 +70,17 @@ export class AuditTypeDetailComponent implements OnInit, OnDestroy {
     );
   }
 
-  saveChanges() {
-    // Are changes to the audit_type_component titles here ?
-
-  }
-
   reorderComponents() {
-
-
-    // Get all the ids of lis under the ul
-    /*
-    for (let i in this.audit_type.audit_type_components) {
-      if (this.audit_type.audit_type_components[i].position !== (Number(i) + 1).toString) {
-        this.audit_type.audit_type_components[i].position = (Number(i) + 1).toString;
-        this.audit_type.audit_type_components[i].save().subscribe(
-          (result: any) => {
-            alert('Saved ' + result.title + ' to position' + result.position);
-          },
-          (result: any) => {
-            alert('Failed to save a position');
-          }
-        );
-      }
+    for (const item in this.audit_type.audit_type_components) {
+      this.audit_type.audit_type_components[item].position = item;
+      this.audit_type.audit_type_components[item].save().subscribe(
+        (result: any) => {
+        },
+        (result: any) => {
+          alert('Failed to save a position');
+        }
+      );
     }
-    */
   }
 
 
