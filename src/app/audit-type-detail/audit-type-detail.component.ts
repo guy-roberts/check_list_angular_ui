@@ -13,16 +13,23 @@ import {AuditTypeComponent} from "../../models/audit_type_component.model";
 
 export class AuditTypeDetailComponent implements OnInit, OnDestroy {
 
-
   audit_type: AuditType;
   audit_type_id: string;
   dragularService: DragulaService;
   route: ActivatedRoute;
 
+
   constructor(private datastore: Datastore, route: ActivatedRoute, private dragulaService: DragulaService) {
     this.audit_type_id = route.snapshot.params['id'];
     this.route = route;
     this.dragularService = dragulaService;
+
+
+    this.dragulaService.setOptions('component-bag', {
+      moves: function (el, container, handle) {
+        return handle.className === 'handle';
+      }
+    });
   }
 
   ngOnInit() {
@@ -43,7 +50,7 @@ export class AuditTypeDetailComponent implements OnInit, OnDestroy {
     });
   }
   ngOnDestroy() {
-    // this.dragulaService.destroy('component-bag');
+    this.dragulaService.destroy('component-bag');
   }
   getAuditType(id) {
     this.datastore.findRecord(AuditType, id, {include: 'audit_type_components', sort: 'position'}).subscribe(
@@ -61,11 +68,7 @@ export class AuditTypeDetailComponent implements OnInit, OnDestroy {
           }
         });
 
-        this.dragulaService.setOptions(('component_bag'), {
-          moves: function (el, container, handle) {
-            return handle.className === 'handle';
-          }
-        });
+
       }
     );
   }

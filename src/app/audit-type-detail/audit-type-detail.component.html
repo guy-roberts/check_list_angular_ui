@@ -12,7 +12,7 @@
     </mat-grid-list>
   </mat-card-title>
 
-  <ul class='container' [dragula]='component-bag' [dragulaModel]="audit_type.audit_type_components" >
+  <ul class='container'  [dragula]='component-bag' [dragulaModel]="audit_type.audit_type_components" >
       <li *ngFor="let component of audit_type.audit_type_components" >
         <app-audit-type-edit [audit_type_component]=component></app-audit-type-edit>
       </li>
