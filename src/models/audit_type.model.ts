@@ -13,13 +13,3 @@ export class AuditType extends JsonApiModel {
   @HasMany()
   audit_type_components: AuditTypeComponent[];
 }
-
-@JsonApiModelConfig({
-  type: 'available_components'
-})
-export class AvailableComponents extends JsonApiModel {
-
-  @Attribute()
-  title: string;
-  has_photo: boolean;
-}

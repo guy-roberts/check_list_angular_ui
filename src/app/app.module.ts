@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
 import { AuditTypeListComponent } from './audit-type-list/audit-type-list.component';
@@ -15,7 +16,6 @@ import { DragulaModule } from 'ng2-dragula';
 import { JsonApiModule } from 'angular2-jsonapi';
 import { Datastore } from '../services/datastore';
 import { AuditTypeEditComponent } from './audit-type-edit/audit-type-edit.component';
-
 
 const appRoutes: Routes = [
   { path: 'audit_type/:id',      component: AuditTypeDetailComponent },
@@ -48,6 +48,7 @@ const appRoutes: Routes = [
     DragulaModule,
     MaterialModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
     RouterModule.forRoot(
       appRoutes // ,
       // { enableTracing: true } // <-- debugging purposes only

@@ -34,11 +34,11 @@ figure.mat-figure div {
 /* A clunky way to left align contents of the grid */
 .text-inside-grid {
   position: absolute;
-  left: 2em;
+  left: 1em;
 }
 
 .component-icon {
-  font-size: 200%;
+  font-size: 150%;
   color: #2196F3;
 }
 

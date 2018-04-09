@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { AvailableComponents } from '../../models/audit_type.model';
+import { AvailableComponentTypes } from '../../models/available_component_type.model';
 import { JsonApiQueryData } from 'angular2-jsonapi';
 import { Datastore } from '../../services/datastore';
 
 @Component({
-  selector: 'app-available-components',
+  selector: 'app-available-component-types',
   templateUrl: './available-components.component.html',
   styleUrls: ['./available-components.component.css']
 })
 export class AvailableComponentsComponent implements OnInit {
-  available_components: any;
+  available_component_types: any;
 
   constructor(private datastore: Datastore) { }
 
@@ -18,14 +18,10 @@ export class AvailableComponentsComponent implements OnInit {
   }
 
   getAvailableComponents() {
-    this.datastore.findAll(AvailableComponents, {
-      page: { size: 10, number: 1 },
-      filter: {
-        title: 'Bla Bla',
-      },
+    this.datastore.findAll(AvailableComponentTypes, {
     }).subscribe(
-      (available_components: JsonApiQueryData<AvailableComponents>) => {
-        this.available_components = available_components.getModels();
+      (available_component_types: JsonApiQueryData<AvailableComponentTypes>) => {
+        this.available_component_types = available_component_types.getModels();
       }
     );
   }

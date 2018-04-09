@@ -3,7 +3,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Datastore } from '../../services/datastore';
 import { ActivatedRoute } from '@angular/router';
 import { DragulaService } from 'ng2-dragula';
-import {AuditTypeComponent} from "../../models/audit_type_component.model";
+import { AvailableComponentTypes } from '../../models/available_component_type.model';
+import { JsonApiQueryData } from 'angular2-jsonapi';
 
 @Component({
   selector: 'app-audit-type-detail',
@@ -17,25 +18,35 @@ export class AuditTypeDetailComponent implements OnInit, OnDestroy {
   audit_type_id: string;
   dragularService: DragulaService;
   route: ActivatedRoute;
-
+  available_component_types: any;
 
   constructor(private datastore: Datastore, route: ActivatedRoute, private dragulaService: DragulaService) {
     this.audit_type_id = route.snapshot.params['id'];
     this.route = route;
     this.dragularService = dragulaService;
 
-
-    this.dragulaService.setOptions('component-bag', {
+    /* Its like these options are ignored */
+    this.dragulaService.setOptions('"basket"', {
+      copy: true,
+      accepts: function (el: Element, target: Element, source: Element, sibling: Element) {
+        console.log('accepts called');
+        return false;
+      },
+      invalid: function (el, handle) {
+        console.log('invalid');
+        return false;
+      },
       moves: function (el, container, handle) {
-        return handle.className === 'handle';
+        console.log('moves called');
+        return true;
       }
     });
+    // Get the id from the route, fetch the info about this audit_type
+    this.getAuditType(this.audit_type_id);
+    this.getAvailableComponents();
   }
 
   ngOnInit() {
-    // Get the id from the route, fetch the info about this audit_type
-    this.getAuditType(this.audit_type_id);
-
     this.dragulaService.drag.subscribe((value) => {
       this.onDrag(value.slice(1));
     });
@@ -48,9 +59,11 @@ export class AuditTypeDetailComponent implements OnInit, OnDestroy {
     this.dragulaService.out.subscribe((value) => {
       this.onOut(value.slice(1));
     });
+
+
   }
   ngOnDestroy() {
-    this.dragulaService.destroy('component-bag');
+    this.dragulaService.destroy('basket');
   }
   getAuditType(id) {
     this.datastore.findRecord(AuditType, id, {include: 'audit_type_components', sort: 'position'}).subscribe(
@@ -67,8 +80,15 @@ export class AuditTypeDetailComponent implements OnInit, OnDestroy {
             return 0;
           }
         });
+      }
+    );
+  }
 
-
+  getAvailableComponents() {
+    this.datastore.findAll(AvailableComponentTypes, {
+    }).subscribe(
+      (available_component_types: JsonApiQueryData<AvailableComponentTypes>) => {
+        this.available_component_types = available_component_types.getModels();
       }
     );
   }
@@ -85,8 +105,6 @@ export class AuditTypeDetailComponent implements OnInit, OnDestroy {
       );
     }
   }
-
-
 
   // Dragular functions to show which element has moved
 
@@ -113,6 +131,7 @@ export class AuditTypeDetailComponent implements OnInit, OnDestroy {
 
   private onDrop(args) {
     let [e, el] = args;
+
     this.addClass(e, 'ex-moved');
     this.reorderComponents();
   }

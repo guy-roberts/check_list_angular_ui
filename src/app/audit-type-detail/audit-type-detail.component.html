@@ -1,20 +1,33 @@
-<div *ngIf="audit_type">
-  <mat-card-title>
-    <mat-grid-list cols="2" rowHeight="100px">
-      <mat-grid-tile><span class="check_list_title">{{ audit_type.title }}</span></mat-grid-tile>
-      <mat-grid-tile>
-        <div class="button-row">
-            <button mat-raised-button color="accent" routerLink="/audit_types">Add</button>
-            <button mat-raised-button color="primary" routerLink="/audit_types">Back</button>
-            <button mat-raised-button color="primary" (click)="saveChanges()">Save</button>
-        </div>
-      </mat-grid-tile>
-    </mat-grid-list>
-  </mat-card-title>
+  <mat-grid-list cols="2" rowHeight="100px">
+    <mat-grid-tile><h2 class="check_list_title" *ngIf="audit_type">{{ audit_type.title }}</h2></mat-grid-tile>
+    <mat-grid-tile>
+      <div class="button-row">
+        <button mat-raised-button color="accent" routerLink="/audit_types">Add</button>
+        <button mat-raised-button color="primary" routerLink="/audit_types">Back</button>
+        <button mat-raised-button color="primary" (click)="saveChanges()">Save</button>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
 
-  <ul class='container'  [dragula]='component-bag' [dragulaModel]="audit_type.audit_type_components" >
+
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+
+  <div fxFlex="20%">
+    <ul class='container available_component_types' dragula='"basket"' >
+      <li *ngFor="let available_component_type of available_component_types">
+        <h3>{{available_component_type.title}}</h3>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="audit_type" fxFlex="50%">
+    <ul class='container destination'  dragula='"basket"' [dragulaModel]="audit_type.audit_type_components" >
       <li *ngFor="let component of audit_type.audit_type_components" >
         <app-audit-type-edit [audit_type_component]=component></app-audit-type-edit>
       </li>
-  </ul>
+    </ul>
+  </div>
+
 </div>
+
+
