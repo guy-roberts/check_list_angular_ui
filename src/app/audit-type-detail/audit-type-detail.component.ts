@@ -4,6 +4,9 @@ import { Datastore } from '../../services/datastore';
 import { ActivatedRoute } from '@angular/router';
 import { DragulaService } from 'ng2-dragula';
 import { AvailableComponentTypes } from '../../models/available_component_type.model';
+import { AuditTypeComponent } from '../../models/audit_type_component.model';
+import { JsonApiDatastore } from 'angular2-jsonapi';
+
 import { JsonApiQueryData } from 'angular2-jsonapi';
 
 @Component({
@@ -25,20 +28,9 @@ export class AuditTypeDetailComponent implements OnInit, OnDestroy {
     this.route = route;
     this.dragularService = dragulaService;
 
-    /* Its like these options are ignored */
-    this.dragulaService.setOptions('"basket"', {
-      copy: true,
+    this.dragulaService.setOptions('basket', {
       accepts: function (el: Element, target: Element, source: Element, sibling: Element) {
-        console.log('accepts called');
-        return false;
-      },
-      invalid: function (el, handle) {
-        console.log('invalid');
-        return false;
-      },
-      moves: function (el, container, handle) {
-        console.log('moves called');
-        return true;
+        return (target.className.includes('destination'));
       }
     });
     // Get the id from the route, fetch the info about this audit_type
@@ -59,16 +51,18 @@ export class AuditTypeDetailComponent implements OnInit, OnDestroy {
     this.dragulaService.out.subscribe((value) => {
       this.onOut(value.slice(1));
     });
-
-
   }
+
   ngOnDestroy() {
     this.dragulaService.destroy('basket');
   }
+
   getAuditType(id) {
     this.datastore.findRecord(AuditType, id, {include: 'audit_type_components', sort: 'position'}).subscribe(
       (audit_type: AuditType) => {
         this.audit_type = audit_type;
+
+        this.getAvailableComponents();
 
         // Sort by position
         this.audit_type.audit_type_components = this.audit_type.audit_type_components.sort((a, b) => {
@@ -88,19 +82,33 @@ export class AuditTypeDetailComponent implements OnInit, OnDestroy {
     this.datastore.findAll(AvailableComponentTypes, {
     }).subscribe(
       (available_component_types: JsonApiQueryData<AvailableComponentTypes>) => {
-        this.available_component_types = available_component_types.getModels();
+        const newOnes: Array<AuditTypeComponent> = [];
+        for (const type of available_component_types.getModels()) {
+          const newType = this.datastore.createRecord(AuditTypeComponent, {
+            title: type.title,
+            position: 999,
+            audit_type: this.audit_type,
+            available_component_type: type
+          });
+          /* this.audit_type is not in scope */
+          newOnes.push(newType);
+        }
+        this.available_component_types = newOnes;
       }
     );
   }
 
   reorderComponents() {
+    console.log('reorderComponents');
     for (const item in this.audit_type.audit_type_components) {
       this.audit_type.audit_type_components[item].position = item;
       this.audit_type.audit_type_components[item].save().subscribe(
         (result: any) => {
+          console.log('Success to save a position');
+
         },
         (result: any) => {
-          alert('Failed to save a position');
+          console.log('Failed to save a position');
         }
       );
     }
@@ -146,3 +154,4 @@ export class AuditTypeDetailComponent implements OnInit, OnDestroy {
     this.removeClass(el, 'ex-over');
   }
 }
+

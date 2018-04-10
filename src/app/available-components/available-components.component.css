@@ -23,9 +23,5 @@
 
 .available_component_types {
   text-align: left;
-  height: 1.5em;
-}
-
-.available_component_types h3 {
-  border: 1px solid #666;
+  height: 3em;
 }

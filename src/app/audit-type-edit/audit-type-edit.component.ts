@@ -15,7 +15,11 @@ export class AuditTypeEditComponent implements OnInit {
   constructor() {
   }
   ngOnInit() {
-    this.inEditMode = false;
+    if (typeof(this.audit_type_component.help_text) === 'undefined') {
+      this.inEditMode = true;
+    } else {
+      this.inEditMode = false;
+    }
   }
   startEditing() {
     this.inEditMode = true;
@@ -23,9 +27,11 @@ export class AuditTypeEditComponent implements OnInit {
   cancel() {
     this.inEditMode = false;
   }
-  iconName() {
-
-    switch (this.audit_type_component.name_of_component_type) {
+  deleteComponent() {
+    console.log('Would delete component');
+  }
+  iconName(name) {
+    switch (name) {
       case 'Title':
         return 'payment';
       case 'Choices':
@@ -55,6 +61,7 @@ export class AuditTypeEditComponent implements OnInit {
     }
   }
   saveComponentChanges(component: AuditTypeComponent) {
+      console.log('saveComponentChanges() called');
       component.save().subscribe(
         (result: any) => {
           this.inEditMode = false;

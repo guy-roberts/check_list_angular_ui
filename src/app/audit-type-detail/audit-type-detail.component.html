@@ -13,15 +13,15 @@
 <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
 
   <div fxFlex="20%">
-    <ul class='container available_component_types' dragula='"basket"' >
-      <li *ngFor="let available_component_type of available_component_types">
-        <h3>{{available_component_type.title}}</h3>
+    <ul class='container available_component_types ' dragula='basket' [dragulaModel]="available_component_types">
+      <li *ngFor="let available_component_type of available_component_types" class="dragthing">
+        <p><mat-icon class="component-icon">{{datastore.iconName(available_component_type.title)}}</mat-icon>{{available_component_type.title}}</p>
       </li>
     </ul>
   </div>
 
   <div *ngIf="audit_type" fxFlex="50%">
-    <ul class='container destination'  dragula='"basket"' [dragulaModel]="audit_type.audit_type_components" >
+    <ul class='container destination'  dragula='basket' [dragulaModel]="audit_type.audit_type_components" >
       <li *ngFor="let component of audit_type.audit_type_components" >
         <app-audit-type-edit [audit_type_component]=component></app-audit-type-edit>
       </li>

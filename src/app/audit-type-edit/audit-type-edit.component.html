@@ -1,21 +1,20 @@
 <div class="audit_type_component_edit" >
 
-  <mat-grid-list *ngIf="!inEditMode" cols="10" rowHeight="1.5em">
+  <mat-grid-list *ngIf="!inEditMode" cols="10" rowHeight="1em">
     <mat-grid-tile colspan="1">
-      <mat-icon class="component-icon">{{iconName()}}</mat-icon>
+      <mat-icon class="component-icon">{{iconName(audit_type_component.name_of_component_type)}}</mat-icon>
     </mat-grid-tile>
     <mat-grid-tile colspan="6">
       <div class="text-inside-grid">
-        <h3>{{audit_type_component.title}}</h3>
-        <p>{{audit_type_component.help_text}}</p>
+        <p>{{audit_type_component.title}}</p>
       </div>
     </mat-grid-tile>
     <mat-grid-tile colspan="2">
       <button mat-icon-button *ngIf="!inEditMode" (click)="startEditing()">
         <mat-icon aria-label="Edit this component">edit</mat-icon>
       </button>
-      <button mat-icon-button *ngIf="!inEditMode" (click)="startEditing()">
-        <mat-icon aria-label="Edit this component">pan</mat-icon>
+      <button mat-icon-button *ngIf="!inEditMode" (click)="deleteComponent()">
+        <mat-icon aria-label="Delete">delete</mat-icon>
       </button>
     </mat-grid-tile>
   </mat-grid-list>

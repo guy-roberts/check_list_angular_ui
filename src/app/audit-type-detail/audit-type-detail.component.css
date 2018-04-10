@@ -31,9 +31,20 @@ ul.container {
 }
 
 .ex-moved {
-  border-right: 10px solid #2196F3;
 }
 
 .ex-over {
   color: dodgerblue;
+}
+
+.available_component_types {
+  text-align: left;
+  padding: 1em;
+  border: 1px solid #666;
+}
+
+.dragthing {
+  text-align: left;
+  border: 1px solid #666;
+  list-style: none;
 }

@@ -25,5 +25,4 @@ export class AvailableComponentsComponent implements OnInit {
       }
     );
   }
-
 }

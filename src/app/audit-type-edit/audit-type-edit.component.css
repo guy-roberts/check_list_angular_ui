@@ -6,6 +6,7 @@
 
 form.component-form div {
   margin-right: 2em;
+
 }
 
 .example-container {
@@ -38,7 +39,6 @@ figure.mat-figure div {
 }
 
 .component-icon {
-  font-size: 150%;
   color: #2196F3;
 }
 
@@ -48,5 +48,5 @@ figure.mat-figure div {
 
 .in-edit-mode {
   background-color: #E3F2FD;
-  padding: 1em;
+  padding: 2em;
 }
