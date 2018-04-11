@@ -26,7 +26,7 @@
 
   <div *ngIf="audit_type" fxFlex="80%">
     <ul class='container destination'  dragula='basket' [dragulaModel]="audit_type.audit_type_components" >
-      <li *ngFor="let component of audit_type.audit_type_components" >
+      <li *ngFor="let component of audit_type.audit_type_components" class="dragthing">
         <app-audit-type-edit [audit_type_component]=component></app-audit-type-edit>
       </li>
     </ul>

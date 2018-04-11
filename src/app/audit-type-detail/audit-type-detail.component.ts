@@ -100,19 +100,20 @@ export class AuditTypeDetailComponent implements OnInit, OnDestroy {
     );
   }
 
-  reorderComponents() {
-    /* This needs a test */
-    for (let item in this.audit_type.audit_type_components) {
-      console.log('Physical position ' + item + ' objects position ' + this.audit_type.audit_type_components[item].position );
-    }
 
+
+  /* Update the positions of backing objects and store the changes */
+  saveChanges() {
+    this.reorderComponents();
+  }
+
+  reorderComponents() {
     for (let item in this.audit_type.audit_type_components) {
-      console.log('Setting ' + this.audit_type.audit_type_components[item].title + ' to ' + item);
       this.audit_type.audit_type_components[item].position = item;
       this.audit_type.audit_type_components[item].audit_type = this.audit_type;
       this.audit_type.audit_type_components[item].save().subscribe(
         (result: any) => {
-          console.log('Success to save a position');
+          console.log('Successfully saved a position');
         },
         (result: any) => {
           console.log('Failed to save a position');
@@ -148,7 +149,6 @@ export class AuditTypeDetailComponent implements OnInit, OnDestroy {
     let [e, el] = args;
 
     this.addClass(e, 'ex-moved');
-    this.reorderComponents();
   }
 
   private onOver(args) {
