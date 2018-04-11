@@ -1,6 +1,3 @@
-span.check_list_title {
-  text-align: left;
-}
 
 .gu-mirror {
   position: fixed !important;
@@ -31,6 +28,7 @@ ul.container {
 }
 
 .ex-moved {
+  border-right: 3px solid orangered;
 }
 
 .ex-over {
@@ -39,12 +37,39 @@ ul.container {
 
 .available_component_types {
   text-align: left;
-  padding: 1em;
-  border: 1px solid #666;
+  padding-left: 2em;
 }
 
 .dragthing {
-  text-align: left;
-  border: 1px solid #666;
   list-style: none;
+}
+
+.dragthing mat-icon {
+}
+
+.dragthing p {
+  display: inline;
+  padding-left: 0.25em;
+  color: dodgerblue;
+}
+
+p {
+  color: dodgerblue;
+  text-align: left;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+mat-grid-tile > figure.mat-figure {
+  justify-content: flex-start !important;
+  color: purple;
+}
+
+ul.destination {
+  border-left: 1px dotted dodgerblue;
+}
+
+.mat-grid-tile .mat-figure {
+  color: orange;
+  justify-content: flex-start !important;
 }

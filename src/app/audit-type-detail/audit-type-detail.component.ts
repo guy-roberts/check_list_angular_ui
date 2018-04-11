@@ -62,20 +62,21 @@ export class AuditTypeDetailComponent implements OnInit, OnDestroy {
       (audit_type: AuditType) => {
         this.audit_type = audit_type;
 
-        this.getAvailableComponents();
-
-        // Sort by position
-        this.audit_type.audit_type_components = this.audit_type.audit_type_components.sort((a, b) => {
-          if (a.position < b.position) {
-            return -1;
-          } else if (a.position > b.position) {
-            return 1;
-          } else {
-            return 0;
-          }
-        });
+        this.sortByPosition();
       }
     );
+  }
+
+  sortByPosition() {
+    this.audit_type.audit_type_components = this.audit_type.audit_type_components.sort((a, b) => {
+      if (a.position < b.position) {
+        return -1;
+      } else if (a.position > b.position) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
   }
 
   getAvailableComponents() {
@@ -90,6 +91,7 @@ export class AuditTypeDetailComponent implements OnInit, OnDestroy {
             audit_type: this.audit_type,
             available_component_type: type
           });
+
           /* this.audit_type is not in scope */
           newOnes.push(newType);
         }
@@ -99,13 +101,18 @@ export class AuditTypeDetailComponent implements OnInit, OnDestroy {
   }
 
   reorderComponents() {
-    console.log('reorderComponents');
-    for (const item in this.audit_type.audit_type_components) {
+    /* This needs a test */
+    for (let item in this.audit_type.audit_type_components) {
+      console.log('Physical position ' + item + ' objects position ' + this.audit_type.audit_type_components[item].position );
+    }
+
+    for (let item in this.audit_type.audit_type_components) {
+      console.log('Setting ' + this.audit_type.audit_type_components[item].title + ' to ' + item);
       this.audit_type.audit_type_components[item].position = item;
+      this.audit_type.audit_type_components[item].audit_type = this.audit_type;
       this.audit_type.audit_type_components[item].save().subscribe(
         (result: any) => {
           console.log('Success to save a position');
-
         },
         (result: any) => {
           console.log('Failed to save a position');

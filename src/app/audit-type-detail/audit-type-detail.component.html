@@ -1,26 +1,30 @@
-  <mat-grid-list cols="2" rowHeight="100px">
-    <mat-grid-tile><h2 class="check_list_title" *ngIf="audit_type">{{ audit_type.title }}</h2></mat-grid-tile>
-    <mat-grid-tile>
-      <div class="button-row">
-        <button mat-raised-button color="accent" routerLink="/audit_types">Add</button>
-        <button mat-raised-button color="primary" routerLink="/audit_types">Back</button>
-        <button mat-raised-button color="primary" (click)="saveChanges()">Save</button>
-      </div>
-    </mat-grid-tile>
-  </mat-grid-list>
+<mat-grid-list cols="2" rowHeight="100px" class="dom">
+  <mat-grid-tile class="check_list_title" ><h2 *ngIf="audit_type">{{ audit_type.title }}</h2></mat-grid-tile>
+  <mat-grid-tile>
+    <div class="button-row">
+      <button mat-raised-button color="accent" routerLink="/audit_types">Add</button>
+      <button mat-raised-button color="primary" routerLink="/audit_types">Back</button>
+      <button mat-raised-button color="primary" (click)="saveChanges()">Save</button>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
 
 
 <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
 
   <div fxFlex="20%">
+    <p>Drag items from this list over to the report on the right</p>
     <ul class='container available_component_types ' dragula='basket' [dragulaModel]="available_component_types">
       <li *ngFor="let available_component_type of available_component_types" class="dragthing">
-        <p><mat-icon class="component-icon">{{datastore.iconName(available_component_type.title)}}</mat-icon>{{available_component_type.title}}</p>
+        <p>
+          <mat-icon class="component-icon">{{datastore.iconName(available_component_type.title)}}</mat-icon>
+        </p>
+        <p>{{available_component_type.title}}</p>
       </li>
     </ul>
   </div>
 
-  <div *ngIf="audit_type" fxFlex="50%">
+  <div *ngIf="audit_type" fxFlex="80%">
     <ul class='container destination'  dragula='basket' [dragulaModel]="audit_type.audit_type_components" >
       <li *ngFor="let component of audit_type.audit_type_components" >
         <app-audit-type-edit [audit_type_component]=component></app-audit-type-edit>

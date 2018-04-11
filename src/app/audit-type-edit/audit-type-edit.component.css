@@ -1,17 +1,10 @@
 .audit_type_component_edit {
   text-align: left;
-  padding: 1em;
-  border: 1px solid #666;
+  padding: 0.5em;
+  color: dodgerblue;
 }
 
 form.component-form div {
-  margin-right: 2em;
-
-}
-
-.example-container {
-  display: flex;
-  flex-direction: column;
 }
 
 .example-container > * {
@@ -19,10 +12,9 @@ form.component-form div {
 }
 
 .button-row {
-  text-align: right;
 }
 
-figure.mat-figure div {
+figure.mat-figure  {
   margin: 0;
   padding: 0;
 }
@@ -38,15 +30,13 @@ figure.mat-figure div {
   left: 1em;
 }
 
-.component-icon {
-  color: #2196F3;
-}
-
 .alert {
   color: red;
 }
 
 .in-edit-mode {
   background-color: #E3F2FD;
-  padding: 2em;
+  padding: 1em;
 }
+
+

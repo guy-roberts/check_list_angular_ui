@@ -6,14 +6,14 @@
     </mat-grid-tile>
     <mat-grid-tile colspan="6">
       <div class="text-inside-grid">
-        <p>{{audit_type_component.title}}</p>
+        <p>{{audit_type_component.title}} ({{audit_type_component.position}})</p>
       </div>
     </mat-grid-tile>
     <mat-grid-tile colspan="2">
       <button mat-icon-button *ngIf="!inEditMode" (click)="startEditing()">
         <mat-icon aria-label="Edit this component">edit</mat-icon>
       </button>
-      <button mat-icon-button *ngIf="!inEditMode" (click)="deleteComponent()">
+      <button mat-icon-button *ngIf="!inEditMode" (click)="deleteComponent()" class="alert">
         <mat-icon aria-label="Delete">delete</mat-icon>
       </button>
     </mat-grid-tile>
