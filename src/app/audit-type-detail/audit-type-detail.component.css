@@ -73,3 +73,10 @@ ul.destination {
   color: orange;
   justify-content: flex-start !important;
 }
+
+.check_list_title  {
+  text-align: left;
+  position: absolute;
+  left: 5px;
+  color: dodgerblue;
+}

@@ -7,6 +7,7 @@ import { AvailableComponentTypes } from '../models/available_component_type.mode
 import { JsonApiDatastoreConfig, JsonApiDatastore, DatastoreConfig } from 'angular2-jsonapi';
 
 const config: DatastoreConfig = {
+  /* TODO: put baseUrl in an environment variable */
   baseUrl: 'http://localhost:3000/check_list_engine/api/',
   models: {
     audit_type: AuditType,

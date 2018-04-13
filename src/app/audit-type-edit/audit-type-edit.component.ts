@@ -1,6 +1,8 @@
+import { JsonApiQueryData } from 'angular2-jsonapi';
+import { Datastore } from '../../services/datastore';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AuditTypeComponent } from '../../models/audit_type_component.model';
 
-import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-audit-type-edit',
@@ -12,8 +14,16 @@ export class AuditTypeEditComponent implements OnInit {
   inEditMode: boolean;
 
   @Input() audit_type_component: AuditTypeComponent;
-  constructor() {
+
+  /* This might be too complicated, its a way to tell the parent AuditTypeDetailComponent
+   * that this AuditTypeEditComponent has been deleted.
+   * It would be simpler if the delete button was in the parent list
+   * */
+  @Output() iHaveBeenDeleted = new EventEmitter();
+
+  constructor(private datastore: Datastore) {
   }
+
   ngOnInit() {
     if (typeof(this.audit_type_component.help_text) === 'undefined') {
       this.inEditMode = true;
@@ -27,9 +37,17 @@ export class AuditTypeEditComponent implements OnInit {
   cancel() {
     this.inEditMode = false;
   }
-  deleteComponent() {
-    console.log('Would delete component');
+  deleteComponent(doomedComponent) {
+    this.datastore.deleteRecord(AuditTypeComponent, doomedComponent.id).subscribe(() => {
+        /* Generate a message to the parent AuditTypeEditComponent */
+        this.iHaveBeenDeleted.next();
+      },
+        (result: any) => {
+          alert('Failed to delete an AuditTypeComponent');
+      }
+    );
   }
+
   iconName(name) {
     switch (name) {
       case 'Title':
@@ -61,7 +79,6 @@ export class AuditTypeEditComponent implements OnInit {
     }
   }
   saveComponentChanges(component: AuditTypeComponent) {
-      console.log('saveComponentChanges() called');
       component.save().subscribe(
         (result: any) => {
           this.inEditMode = false;

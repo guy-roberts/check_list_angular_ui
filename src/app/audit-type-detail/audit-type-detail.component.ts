@@ -5,7 +5,6 @@ import { ActivatedRoute } from '@angular/router';
 import { DragulaService } from 'ng2-dragula';
 import { AvailableComponentTypes } from '../../models/available_component_type.model';
 import { AuditTypeComponent } from '../../models/audit_type_component.model';
-import { JsonApiDatastore } from 'angular2-jsonapi';
 
 import { JsonApiQueryData } from 'angular2-jsonapi';
 
@@ -29,6 +28,7 @@ export class AuditTypeDetailComponent implements OnInit, OnDestroy {
     this.dragularService = dragulaService;
 
     this.dragulaService.setOptions('basket', {
+
       accepts: function (el: Element, target: Element, source: Element, sibling: Element) {
         return (target.className.includes('destination'));
       }
@@ -87,9 +87,11 @@ export class AuditTypeDetailComponent implements OnInit, OnDestroy {
         for (const type of available_component_types.getModels()) {
           const newType = this.datastore.createRecord(AuditTypeComponent, {
             title: type.title,
+            help_text: 'Describe the purpose of this section',
             position: 999,
             audit_type: this.audit_type,
-            available_component_type: type
+            available_component_type: type,
+            name_of_component_type: type.title
           });
 
           /* this.audit_type is not in scope */
@@ -100,11 +102,20 @@ export class AuditTypeDetailComponent implements OnInit, OnDestroy {
     );
   }
 
-
-
   /* Update the positions of backing objects and store the changes */
   saveChanges() {
     this.reorderComponents();
+  }
+
+  /* Called when an event, iHaveBeenDeleted, is sent from a child AuditTypeEditComponent
+   * This is a bit over complicated
+   */
+  deleteComponent(doomedComponent: AuditTypeComponent) {
+    var index = this.audit_type.audit_type_components.indexOf(doomedComponent, 0);
+    
+    if (index > -1) {
+      this.audit_type.audit_type_components.splice(index, 1);
+    }
   }
 
   reorderComponents() {
@@ -113,7 +124,6 @@ export class AuditTypeDetailComponent implements OnInit, OnDestroy {
       this.audit_type.audit_type_components[item].audit_type = this.audit_type;
       this.audit_type.audit_type_components[item].save().subscribe(
         (result: any) => {
-          console.log('Successfully saved a position');
         },
         (result: any) => {
           console.log('Failed to save a position');
@@ -147,6 +157,8 @@ export class AuditTypeDetailComponent implements OnInit, OnDestroy {
 
   private onDrop(args) {
     let [e, el] = args;
+    /* Add the audit_type here ? */
+    /* Get the object first */
 
     this.addClass(e, 'ex-moved');
   }
@@ -161,4 +173,3 @@ export class AuditTypeDetailComponent implements OnInit, OnDestroy {
     this.removeClass(el, 'ex-over');
   }
 }
-

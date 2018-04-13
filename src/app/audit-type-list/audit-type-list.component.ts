@@ -4,7 +4,6 @@ import { JsonApiQueryData } from 'angular2-jsonapi';
 import { Datastore } from '../../services/datastore';
 import { AuditType } from '../../models/audit_type.model';
 
-
 @Component({
   selector: 'app-audit-type-list',
   templateUrl: './audit-type-list.component.html',
@@ -33,7 +32,4 @@ export class AuditTypeListComponent implements OnInit {
       }
     );
   }
-
-
-
 }

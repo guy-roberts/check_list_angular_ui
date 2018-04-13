@@ -1,5 +1,4 @@
 import { JsonApiModelConfig, JsonApiModel, Attribute, HasMany } from 'angular2-jsonapi';
-
 import { AuditTypeComponent } from './audit_type_component.model';
 
 @JsonApiModelConfig({

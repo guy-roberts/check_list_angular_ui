@@ -1,6 +1,6 @@
 <div class="audit_type_component_edit" >
 
-  <mat-grid-list *ngIf="!inEditMode" cols="10" rowHeight="1em">
+  <mat-grid-list *ngIf="!inEditMode" cols="10" rowHeight="1.2em">
     <mat-grid-tile colspan="1">
       <mat-icon class="component-icon">{{iconName(audit_type_component.name_of_component_type)}}</mat-icon>
     </mat-grid-tile>
@@ -13,7 +13,7 @@
       <button mat-icon-button *ngIf="!inEditMode" (click)="startEditing()">
         <mat-icon aria-label="Edit this component">edit</mat-icon>
       </button>
-      <button mat-icon-button *ngIf="!inEditMode" (click)="deleteComponent()" class="alert">
+      <button mat-icon-button *ngIf="!inEditMode" (click)="deleteComponent(audit_type_component)" class="alert">
         <mat-icon aria-label="Delete">delete</mat-icon>
       </button>
     </mat-grid-tile>
