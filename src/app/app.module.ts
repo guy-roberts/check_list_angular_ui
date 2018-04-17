@@ -9,13 +9,13 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppComponent } from './app.component';
 import { AuditTypeListComponent } from './audit-type-list/audit-type-list.component';
 import { AuditTypeDetailComponent } from './audit-type-detail/audit-type-detail.component';
-import { AvailableComponentsComponent } from './available-components/available-components.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 import { DragulaModule } from 'ng2-dragula';
 import { JsonApiModule } from 'angular2-jsonapi';
 import { Datastore } from '../services/datastore';
 import { AuditTypeEditComponent } from './audit-type-edit/audit-type-edit.component';
+import { AuditTypeNewComponent } from './audit-type-new/audit-type-new.component';
 
 const appRoutes: Routes = [
   { path: 'audit_type/:id',      component: AuditTypeDetailComponent },
@@ -23,6 +23,12 @@ const appRoutes: Routes = [
     path: 'audit_types',
     component: AuditTypeListComponent,
     data: { title: 'List of Audit Types' }
+  },
+  {
+    path: 'audit_types/new',
+    component: AuditTypeNewComponent,
+    data: { title: 'New Audit Type' }
+
   },
   { path: '',
     redirectTo: '/audit_types',
@@ -36,10 +42,10 @@ const appRoutes: Routes = [
     AppComponent,
     AuditTypeListComponent,
     AuditTypeDetailComponent,
-    AvailableComponentsComponent,
     AuditTypeEditComponent,
     PageNotFoundComponent,
-    AuditTypeEditComponent
+    AuditTypeEditComponent,
+    AuditTypeNewComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,3 @@
-
 .gu-mirror {
   position: fixed !important;
   margin: 0 !important;
@@ -28,16 +27,11 @@ ul.container {
 }
 
 .ex-moved {
-  border-right: 3px solid orangered;
+  border-left: 3px solid orangered;
 }
 
 .ex-over {
   color: dodgerblue;
-}
-
-.available_component_types {
-  text-align: left;
-  padding-left: 2em;
 }
 
 .dragthing {
@@ -65,10 +59,6 @@ mat-grid-tile > figure.mat-figure {
   color: purple;
 }
 
-ul.destination {
-  border-left: 1px dotted dodgerblue;
-}
-
 .mat-grid-tile .mat-figure {
   color: orange;
   justify-content: flex-start !important;
@@ -79,4 +69,27 @@ ul.destination {
   position: absolute;
   left: 5px;
   color: dodgerblue;
+}
+
+/* A clunky way to left align contents of the grid */
+.text-inside-grid {
+  position: absolute;
+  left: 1em;
+}
+
+.available_component_types {
+  text-align: left;
+  color: dodgerblue;
+  border-right: 1px dotted dodgerblue;
+  margin-right: 2em;
+  padding-left: 2em;
+
+}
+
+.available_component_types li {
+  padding-top: 1.1em;
+}
+
+.destination {
+  min-height: 5em;
 }

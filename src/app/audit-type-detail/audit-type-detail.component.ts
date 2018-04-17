@@ -28,7 +28,6 @@ export class AuditTypeDetailComponent implements OnInit, OnDestroy {
     this.dragularService = dragulaService;
 
     this.dragulaService.setOptions('basket', {
-
       accepts: function (el: Element, target: Element, source: Element, sibling: Element) {
         return (target.className.includes('destination'));
       }
@@ -36,6 +35,7 @@ export class AuditTypeDetailComponent implements OnInit, OnDestroy {
     // Get the id from the route, fetch the info about this audit_type
     this.getAuditType(this.audit_type_id);
     this.getAvailableComponents();
+
   }
 
   ngOnInit() {
@@ -68,21 +68,24 @@ export class AuditTypeDetailComponent implements OnInit, OnDestroy {
   }
 
   sortByPosition() {
-    this.audit_type.audit_type_components = this.audit_type.audit_type_components.sort((a, b) => {
-      if (a.position < b.position) {
-        return -1;
-      } else if (a.position > b.position) {
-        return 1;
-      } else {
-        return 0;
-      }
-    });
+    if (this.audit_type.audit_type_components) {
+      this.audit_type.audit_type_components = this.audit_type.audit_type_components.sort((a, b) => {
+        if (a.position < b.position) {
+          return -1;
+        } else if (a.position > b.position) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    }
   }
 
   getAvailableComponents() {
     this.datastore.findAll(AvailableComponentTypes, {
     }).subscribe(
       (available_component_types: JsonApiQueryData<AvailableComponentTypes>) => {
+
         const newOnes: Array<AuditTypeComponent> = [];
         for (const type of available_component_types.getModels()) {
           const newType = this.datastore.createRecord(AuditTypeComponent, {
@@ -98,6 +101,7 @@ export class AuditTypeDetailComponent implements OnInit, OnDestroy {
           newOnes.push(newType);
         }
         this.available_component_types = newOnes;
+
       }
     );
   }
@@ -112,7 +116,7 @@ export class AuditTypeDetailComponent implements OnInit, OnDestroy {
    */
   deleteComponent(doomedComponent: AuditTypeComponent) {
     var index = this.audit_type.audit_type_components.indexOf(doomedComponent, 0);
-    
+
     if (index > -1) {
       this.audit_type.audit_type_components.splice(index, 1);
     }
@@ -156,9 +160,12 @@ export class AuditTypeDetailComponent implements OnInit, OnDestroy {
   }
 
   private onDrop(args) {
-    let [e, el] = args;
-    /* Add the audit_type here ? */
-    /* Get the object first */
+    let [e, el, source, thing] = args;
+
+    if (source.className.includes('available_component_types')) {
+      // Refresh the list of available components !
+      this.getAvailableComponents();
+    }
 
     this.addClass(e, 'ex-moved');
   }

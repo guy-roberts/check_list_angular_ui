@@ -6,7 +6,6 @@
   </mat-grid-tile>
   <mat-grid-tile>
     <div class="button-row">
-      <button mat-raised-button color="accent" routerLink="/audit_types">Add</button>
       <button mat-raised-button color="primary" routerLink="/audit_types">Back</button>
       <button mat-raised-button color="primary" (click)="saveChanges()">Save</button>
     </div>
@@ -20,10 +19,16 @@
     <p>Drag items from this list over to the report on the right</p>
     <ul class='container available_component_types ' dragula='basket' [dragulaModel]="available_component_types">
       <li *ngFor="let available_component_type of available_component_types" class="dragthing">
-        <p>
-          <mat-icon class="component-icon">{{datastore.iconName(available_component_type.title)}}</mat-icon>
-        </p>
-        <p>{{available_component_type.title}}</p>
+        <mat-grid-list cols="4" rowHeight="1.2em">
+          <mat-grid-tile colspan="1">
+            <mat-icon class="component-icon">{{datastore.iconName(available_component_type.title)}}</mat-icon>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="3">
+            <div class="text-inside-grid">
+              <p>{{available_component_type.title}}</p>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
       </li>
     </ul>
   </div>
@@ -35,7 +40,4 @@
       </li>
     </ul>
   </div>
-
 </div>
-
-

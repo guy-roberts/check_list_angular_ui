@@ -1,4 +1,4 @@
-<div class="audit_type_component_edit" >
+<div [ngClass]="{'audit_type_component_edit': true, 'dirty': audit_type_component.hasDirtyAttributes}">
 
   <mat-grid-list *ngIf="!inEditMode" cols="10" rowHeight="1.2em">
     <mat-grid-tile colspan="1">
@@ -6,7 +6,7 @@
     </mat-grid-tile>
     <mat-grid-tile colspan="6">
       <div class="text-inside-grid">
-        <p>{{audit_type_component.title}}</p>
+        <p (click)='startEditing()'>{{audit_type_component.title}}</p>
       </div>
     </mat-grid-tile>
     <mat-grid-tile colspan="2">
@@ -40,10 +40,8 @@
       <mat-checkbox  name="is_mandatory" [(ngModel)]="audit_type_component.is_mandatory"></mat-checkbox>
 
       <div class="button-row">
-        <button type="submit" mat-raised-button [disabled]="!componentForm.form.valid">Save</button>
         <button mat-raised-button (click)="cancel()">Cancel</button>
       </div>
-
     </section>
   </form>
 

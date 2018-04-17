@@ -1,0 +1,22 @@
+<h2>
+  New Audit Type
+</h2>
+
+<form class="auditTypeForm"  #componentForm="ngForm"  name="auditTypeForm" class="component-form" novalidate (ngSubmit)="saveChanges()">
+
+  <mat-form-field>
+    <input matInput placeholder="Title" value="{{title}}" name="title" [(ngModel)]="title" required #name="ngModel">
+    <div [hidden]="name.valid || name.pristine"
+         class="alert alert-danger">
+      Title is required
+    </div>
+  </mat-form-field>
+
+  <section>
+
+    <div class="button-row">
+      <button type="submit" mat-raised-button [disabled]="!componentForm.form.valid">Save</button>
+      <button type="button" mat-raised-button  routerLink="/">Cancel</button>
+    </div>
+  </section>
+</form>
